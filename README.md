@@ -82,11 +82,15 @@ class FinderController extends Controller
                     id="my_item_name"
                     name="my_item_name"
                     placeholder="Name"
-                    oninvalid="searchMyItemName('')"
-                    onkeyup="searchMyItemName('')"
-                    onchange="searchMyItemName('')"
                     autofocus
                 />
+                <button
+                    class="btn btn-primary ml-1 mr-1"
+                    id="my_item_name_btn"
+                    onclick="searchMyItemName('')"
+                >
+                    Cari
+                </button>
                 <select
                     name="my_item_name_select"
                     id="my_item_name_select"
@@ -107,8 +111,22 @@ class FinderController extends Controller
     });
 
     function searchMyItemName(data) {
+        document.getElementById("my_item_name_btn").disabled = true;
+        document.getElementById("my_item_name_btn").innerHTML =
+            "Please Wait...";
         var my_item_name = document.getElementById("my_item_name").value;
-        if (my_item_name.length > 0) {
+
+        var x = document.getElementById("my_item_name_select");
+        x.innerHTML = "";
+        var optiondis = document.createElement("option");
+        optiondis.text = "Select";
+        optiondis.disabled = true;
+        optiondis.selected = true;
+        x.add(optiondis);
+
+        // if (my_item_name.length > 0) {
+        var delayInMilliseconds = 2000; //2 second
+        setTimeout(function () {
             $.ajax({
                 url: "/finder/searchMyItemName?name=" + my_item_name,
                 type: "GET",
@@ -133,20 +151,19 @@ class FinderController extends Controller
                         }
                         x.add(option);
                     }
+
+                    document.getElementById("my_item_name_btn").innerHTML =
+                        "Find";
+                    document.getElementById(
+                        "my_item_name_btn"
+                    ).disabled = false;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // alert('Gagal mendapatkan data');
                 },
             });
-        } else {
-            var x = document.getElementById("my_item_name_select");
-            x.innerHTML = "";
-            var optiondis = document.createElement("option");
-            optiondis.text = "Select";
-            optiondis.disabled = true;
-            optiondis.selected = true;
-            x.add(optiondis);
-        }
+        }, delayInMilliseconds);
+        // }
     }
 </script>
 ```

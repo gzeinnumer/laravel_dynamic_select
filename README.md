@@ -3,8 +3,10 @@
 ![](/preview/preview1.png)
 
 ```php
-Route::get('/finder', [FinderController::class, 'index']);
-Route::get('/finder/searchMyItemName', [FinderController::class, 'searchMyItemName']);
+Route::prefix('finder')->group(function () {
+    Route::get('/', [FinderController::class, 'index']);
+    Route::get('/searchMyItemName', [FinderController::class, 'searchMyItemName']);
+});
 ```
 
 ```php

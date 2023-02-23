@@ -15,9 +15,9 @@ class FinderController extends Controller
     function searchMyItemName(Request $r)
     {
         $data = User::select();
-
-        if (urldecode($r->name) != "") {
-            $data = $data->where('name', 'LIKE', '%' . urldecode($r->name) . '%');
+        $name = urldecode($r->name);
+        if ($name != "") {
+            $data = $data->where('name', 'LIKE', '%' . $name . '%');
         }
         $data = $data->get();
 

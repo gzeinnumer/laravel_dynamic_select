@@ -13,7 +13,7 @@
 
 <body>
 
-    @include('examples.content')
+    @include('finder.content')
 
 </body>
 

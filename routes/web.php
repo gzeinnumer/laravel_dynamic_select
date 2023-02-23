@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ExamplesController;
+use App\Http\Controllers\FinderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/examples', [ExamplesController::class, 'index']);
-Route::get('/examples/searchMyItemName', [ExamplesController::class, 'searchMyItemName']);
+Route::get('/finder', [FinderController::class, 'index']);
+Route::get('/finder/searchMyItemName', [FinderController::class, 'searchMyItemName']);

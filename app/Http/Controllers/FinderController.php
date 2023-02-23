@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ExamplesController extends Controller
+class FinderController extends Controller
 {
     function index()
     {
-        return view('examples.index');
+        return view('finder.index');
     }
 
     function searchMyItemName(Request $r)

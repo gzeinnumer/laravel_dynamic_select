@@ -18,7 +18,7 @@
         var my_item_name = document.getElementById("my_item_name").value;
         if (my_item_name.length > 0) {
             $.ajax({
-                url: '/examples/searchMyItemName?name=' + my_item_name,
+                url: '/finder/searchMyItemName?name=' + my_item_name,
                 type: "GET",
                 dataType: "JSON",
                 success: function(data) {

@@ -3,8 +3,8 @@
 ![](/preview/preview1.png)
 
 ```php
-Route::get('/examples', [ExamplesController::class, 'index']);
-Route::get('/examples/searchMyItemName', [ExamplesController::class, 'searchMyItemName']);
+Route::get('/finder', [FinderController::class, 'index']);
+Route::get('/finder/searchMyItemName', [FinderController::class, 'searchMyItemName']);
 ```
 
 ```php
@@ -15,11 +15,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ExamplesController extends Controller
+class FinderController extends Controller
 {
     function index()
     {
-        return view('examples.index');
+        return view('finder.index');
     }
 
     function searchMyItemName(Request $r)
@@ -63,7 +63,7 @@ class ExamplesController extends Controller
     </head>
 
     <body>
-        @include('examples.content')
+        @include('finder.content')
     </body>
 </html>
 ```
@@ -104,7 +104,7 @@ class ExamplesController extends Controller
         var my_item_name = document.getElementById("my_item_name").value;
         if (my_item_name.length > 0) {
             $.ajax({
-                url: "/examples/searchMyItemName?name=" + my_item_name,
+                url: "/finder/searchMyItemName?name=" + my_item_name,
                 type: "GET",
                 dataType: "JSON",
                 success: function (data) {

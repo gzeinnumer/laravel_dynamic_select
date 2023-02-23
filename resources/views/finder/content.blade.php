@@ -14,6 +14,10 @@
 
 
 <script type="text/javascript">
+    $(function() {
+        searchMyItemName('');
+    });
+
     function searchMyItemName(data) {
         var my_item_name = document.getElementById("my_item_name").value;
         if (my_item_name.length > 0) {

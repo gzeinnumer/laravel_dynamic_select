@@ -1,6 +1,6 @@
 # laravel_dynamic_select
 
-![]('preview/preview1.png')
+![]('/preview/preview1.png')
 
 ```php
 Route::get('/examples', [ExamplesController::class, 'index']);

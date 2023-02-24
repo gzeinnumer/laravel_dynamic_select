@@ -4,7 +4,8 @@
             <label>Find Item</label>
             <div class="input-group mb-2">
                 <input type="text" class="form-control" id="myItemName_input" name="myItemName_input" placeholder="Name" autofocus>
-                <button class="btn btn-primary ml-1 mr-1" id="myItemName_btn" onclick="searchMyItemName('')">Cari</button>
+                <button class="btn btn-primary ml-1 mr-1" id="myItemName_btn" onclick="myItemNameSearch('')">Cari</button>
+                <button class="btn btn-primary ml-1 mr-1" id="myItemName_count">0 Data</button>
                 <select name="myItemName_select" id="myItemName_select" class="form-control" aria-label="Default select example" required>
                     <option disabled selected value="">Select</option>
                 </select>
@@ -16,12 +17,13 @@
 
 <script type="text/javascript">
     $(function() {
-        searchMyItemName('');
+        myItemNameSearch('');
     });
 
-    function searchMyItemName(data) {
+    function myItemNameSearch(data) {
         document.getElementById('myItemName_btn').disabled = true;
         document.getElementById('myItemName_btn').innerHTML = "Please Wait...";
+        document.getElementById('myItemName_count').innerHTML = "0 Data";
         var myItemName_input = document.getElementById("myItemName_input").value;
 
         var x = document.getElementById("myItemName_select");
@@ -34,13 +36,13 @@
 
         var delayInMilliseconds = 2000; //2 second
         setTimeout(function() {
-            searchMyItemNameAction(myItemName_input);
+            myItemNameSearchAction(myItemName_input);
         }, delayInMilliseconds);
     }
 
-    function searchMyItemNameAction() {
+    function myItemNameSearchAction(myItemName_input) {
         $.ajax({
-            url: '/finder/searchMyItemName?name=' + myItemName_input,
+            url: '/finder/myItemNameSearch?name=' + myItemName_input,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -65,6 +67,7 @@
                 }
 
                 document.getElementById('myItemName_btn').innerHTML = "Find";
+                document.getElementById('myItemName_count').innerHTML = data.length + " Data";
                 document.getElementById('myItemName_btn').disabled = false;
             },
             error: function(jqXHR, textStatus, errorThrown) {

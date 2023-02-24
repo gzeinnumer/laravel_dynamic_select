@@ -12,7 +12,7 @@ class FinderController extends Controller
         return view('finder.index');
     }
 
-    function searchMyItemName(Request $r)
+    function myItemNameSearch(Request $r)
     {
         $data = User::select();
         $name = urldecode($r->name);

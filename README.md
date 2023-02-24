@@ -5,7 +5,7 @@
 ```php
 Route::prefix('finder')->group(function () {
     Route::get('/', [FinderController::class, 'index']);
-    Route::get('/searchMyItemName', [FinderController::class, 'searchMyItemName']);
+    Route::get('/myItemNameSearch', [FinderController::class, 'myItemNameSearch']);
 });
 ```
 
@@ -24,7 +24,7 @@ class FinderController extends Controller
         return view('finder.index');
     }
 
-    function searchMyItemName(Request $r)
+    function myItemNameSearch(Request $r)
     {
         $data = User::select();
         $name = urldecode($r->name);
@@ -87,9 +87,12 @@ class FinderController extends Controller
                 <button
                     class="btn btn-primary ml-1 mr-1"
                     id="myItemName_btn"
-                    onclick="searchMyItemName('')"
+                    onclick="myItemNameSearch('')"
                 >
                     Cari
+                </button>
+                <button class="btn btn-primary ml-1 mr-1" id="myItemName_count">
+                    0 Data
                 </button>
                 <select
                     name="myItemName_select"
@@ -107,12 +110,13 @@ class FinderController extends Controller
 
 <script type="text/javascript">
     $(function () {
-        searchMyItemName("");
+        myItemNameSearch("");
     });
 
-    function searchMyItemName(data) {
+    function myItemNameSearch(data) {
         document.getElementById("myItemName_btn").disabled = true;
         document.getElementById("myItemName_btn").innerHTML = "Please Wait...";
+        document.getElementById("myItemName_count").innerHTML = "0 Data";
         var myItemName_input =
             document.getElementById("myItemName_input").value;
 
@@ -126,13 +130,13 @@ class FinderController extends Controller
 
         var delayInMilliseconds = 2000; //2 second
         setTimeout(function () {
-            searchMyItemNameAction(myItemName_input);
+            myItemNameSearchAction(myItemName_input);
         }, delayInMilliseconds);
     }
 
-    function searchMyItemNameAction() {
+    function myItemNameSearchAction(myItemName_input) {
         $.ajax({
-            url: "/finder/searchMyItemName?name=" + myItemName_input,
+            url: "/finder/myItemNameSearch?name=" + myItemName_input,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
@@ -157,6 +161,8 @@ class FinderController extends Controller
                 }
 
                 document.getElementById("myItemName_btn").innerHTML = "Find";
+                document.getElementById("myItemName_count").innerHTML =
+                    data.length + " Data";
                 document.getElementById("myItemName_btn").disabled = false;
             },
             error: function (jqXHR, textStatus, errorThrown) {

@@ -22,4 +22,5 @@ Route::get('/', function () {
 Route::prefix('finder')->group(function () {
     Route::get('/', [FinderController::class, 'index']);
     Route::get('/myItemNameSearch', [FinderController::class, 'myItemNameSearch']);
+    Route::get('/myItemNameV2Search', [FinderController::class, 'myItemNameV2Search']);
 });

@@ -14,6 +14,8 @@
 <body>
 
     @include('finder.content')
+    @include('finder.content_v2')
+    @include('finder.content_v3')
 
 </body>
 
